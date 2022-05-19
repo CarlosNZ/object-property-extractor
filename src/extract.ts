@@ -1,12 +1,4 @@
-type BasicValue = string | number | boolean | null | undefined | Function
-
-interface BasicObject {
-  [key: string]: BasicValue | BasicObject | (BasicObject | BasicValue)[]
-}
-
-type BasicArray = (BasicObject | BasicValue)[]
-
-type InputObject = BasicObject | BasicValue | BasicArray
+import { BasicObject, InputObject } from './types'
 
 // Returns a specific property or index (e.g. application.name) from a nested Object
 const extractProperty = (
@@ -46,8 +38,6 @@ const splitPropertyString = (propertyPath: string) => {
   return arr.flat()
 }
 
-export default extractProperty
-
 const fallbackOrError = (obj: InputObject, property: string | number, fallback: any) => {
   if (fallback === undefined)
     throw new Error(`Unable to extract object property
@@ -55,3 +45,5 @@ Looking for property: ${property}
 In object: ${JSON.stringify(obj)}`)
   else return fallback
 }
+
+export default extractProperty

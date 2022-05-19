@@ -26,3 +26,4 @@ jspm_packages/
 .env.test
 
 .DS_Store
+scratch.js

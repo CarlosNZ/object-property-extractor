@@ -1,6 +1,6 @@
 {
   "name": "object-property-extractor",
-  "version": "1.0.0",
+  "version": "1.0.0-beta1",
   "description": "Access deep object properties using a string (e.g. 'user.country.name')",
   "main": "extract.ts",
   "repository": "https://github.com/CarlosNZ/object-property-extractor.git",

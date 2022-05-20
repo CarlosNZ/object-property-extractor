@@ -1,4 +1,5 @@
 # Object Property Extractor
+
 Access deep object properties using a string (e.g. "user.country.name")
 
 A lightweight (no dependencies) tool to extract deeply nested values from JS Objects (or Arrays), with optional Fallback.
@@ -8,7 +9,7 @@ Similar to [Lodash' `get`](https://lodash.com/docs/4.17.15#get) function, but wi
 ## Why?
 
 Consider the object
-```
+```js
 const data = {
   user: {
     name: { first: 'Jango', last: 'Fett' },
@@ -23,29 +24,37 @@ const data = {
 ```
 
 In Javascript, you call inner object properties via dot notation:
-```
+```js
 data.user.name.last // Fett
 ```
 
 If you want to access a property dynamically, you can do this:
-```
+```js
 const key = "user" 
 return data[key]
 ```
 
 However, you *can't* do this:
-```
+```js
 const key = "user.name"
 return data[key]
 ```
 
 This tool allows access to deep properties from a single "property path" string.
 
+## Installation
+
+```js
+yarn add object-property-extractor
+// OR
+npm install object-property-extractor
+```
+
 ## Usage
 
 `extract( dataObject, propertyString, [fallback] )`
 
-```
+```js
 import extract from "object-property-extractor"
 
 // Using the data object above
@@ -63,7 +72,7 @@ extract(data, "user.children[1]") // Boba
 In addition to accessing array by index (above), if an array consists of objects, then it's possible to exract a single property from *each* object in the returned array.
 
 For example:
-```
+```js
 extract(data, "user.weapons.name")
 // ["Blaster", "Seismic charge"]
 ```

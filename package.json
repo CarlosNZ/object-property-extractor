@@ -1,8 +1,9 @@
 {
   "name": "object-property-extractor",
-  "version": "1.0.0-beta1",
-  "description": "Access deep object properties using a string (e.g. 'user.country.name')",
-  "main": "extract.ts",
+  "version": "1.0.0",
+  "description": "A lightweight (no dependencies) tool to extract deeply nested values from JS Objects (or Arrays), with optional Fallback.",
+  "main": "build/extract.js",
+  "types": "build/extract.d.js",
   "repository": "https://github.com/CarlosNZ/object-property-extractor.git",
   "author": "Carl Smith <5456533+CarlosNZ@users.noreply.github.com>",
   "license": "MIT",

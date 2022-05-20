@@ -32,4 +32,16 @@ const arrayObj = [
   },
 ]
 
-console.log(extract(testObj1, 'b.inner3.innerDeep2[0]'))
+const data = {
+  user: {
+    name: { first: 'Jango', last: 'Fett' },
+    children: ['Boba', 'Clone 1', 'Clone 2'],
+    weapons: [
+      { name: 'Blaster', description: 'For shooting stuff' },
+      { name: 'Seismic charge', description: '...BWAAAAAANG' },
+    ],
+  },
+}
+
+console.log(extract(data, 'user.weapons.name'))
+console.log((extract(data, 'user.weapons') as any[]).map((weapon) => weapon.name))

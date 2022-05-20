@@ -10,7 +10,7 @@
   "repository": "https://github.com/CarlosNZ/object-property-extractor.git",
   "author": "Carl Smith <5456533+CarlosNZ@users.noreply.github.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
     "test": "jest",
     "build": "rimraf ./build && tsc"

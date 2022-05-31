@@ -1,9 +1,7 @@
-export type BasicValue = string | number | boolean | null | undefined | Function
-
 export type BasicObject = {
-  [key: string]: BasicValue | BasicObject | (BasicObject | BasicValue)[]
+  [key: string]: BasicObject | unknown | (BasicObject | unknown)[]
 }
 
-export type BasicArray = (BasicObject | BasicValue)[]
+export type BasicArray = (BasicObject | unknown)[]
 
-export type InputObject = BasicObject | BasicValue | BasicArray
+export type InputObject = BasicObject | BasicArray | unknown

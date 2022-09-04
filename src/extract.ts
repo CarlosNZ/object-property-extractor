@@ -5,12 +5,14 @@ const extractProperty = (
   inputObj: InputObject,
   properties: string | number | (string | number)[],
   fallback?: any
-): BasicObject | string | number | boolean | any[] | Function => {
+): BasicObject | string | number | boolean | any[] | InputObject | Function => {
   const propertyPathArray = Array.isArray(properties)
     ? properties
     : splitPropertyString(properties as string)
 
   const currentProperty = propertyPathArray[0]
+
+  if (currentProperty === '') return inputObj
 
   if (Array.isArray(inputObj) && typeof currentProperty !== 'number')
     return inputObj.map((item) => extractProperty(item, propertyPathArray, fallback))

@@ -50,6 +50,15 @@ test('Deep props 2', () => {
   expect(extract(testObj1, 'b.inner3.innerDeep')).toBe(2.4)
 })
 
+// Get inner objects
+test('Get inner object, shallow', () => {
+  expect(extract(testObj1, 'a')).toStrictEqual(testObj1.a)
+})
+
+test('Get inner object, deeper', () => {
+  expect(extract(testObj1, 'b.inner3')).toStrictEqual(testObj1.b.inner3)
+})
+
 // Get arrays, various depths
 test('Array at top level', () => {
   expect(extract(testObj1, 'ee')).toStrictEqual([1, 'two', { three: 4 }, false, undefined, null])
@@ -84,6 +93,15 @@ test('Array at top level (object is array)', () => {
 
 test('Array at top level (object is array), with nested elements', () => {
   expect(extract(arrayObj, '[2].one.y')).toStrictEqual(['Why', 'YYY'])
+})
+
+// Empty property strings
+test('Empty property string', () => {
+  expect(extract(testObj1, '')).toStrictEqual(testObj1)
+})
+
+test('Empty property string after .', () => {
+  expect(extract(testObj1, 'b.inner3.')).toStrictEqual(testObj1.b.inner3)
 })
 
 // Run a function in an object
@@ -153,11 +171,6 @@ test('Empty input object, no fallback', () => {
 
 test('Empty input object, with fallback', () => {
   expect(extract({}, 'topLevel', 'alternative')).toBe('alternative')
-})
-
-// Handle empty string
-test('Property is empty string', () => {
-  expect(extract(testObj1, '', 'Fallback')).toBe('Fallback')
 })
 
 // Handle undefined

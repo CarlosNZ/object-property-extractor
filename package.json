@@ -1,6 +1,6 @@
 {
   "name": "object-property-extractor",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A lightweight (no dependencies) tool to extract deeply nested values from JS Objects (or Arrays), with optional Fallback.",
   "main": "build/extract.js",
   "types": "build/extract.d.js",
@@ -14,7 +14,8 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node ./src/dev/dev.ts",
-    "build": "rimraf ./build && tsc"
+    "build": "rimraf ./build && tsc",
+    "prepublish": "yarn build"
   },
   "devDependencies": {
     "@types/jest": "^27.5.1",

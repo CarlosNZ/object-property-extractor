@@ -43,5 +43,6 @@ const data = {
   },
 }
 
+// console.log(extract(data, 'user.children[0].'))
 console.log(extract(data, 'user.weapons.name'))
 console.log((extract(data, 'user.weapons') as any[]).map((weapon) => weapon.name))

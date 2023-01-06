@@ -95,6 +95,14 @@ test('Array at top level (object is array), with nested elements', () => {
   expect(extract(arrayObj, '[2].one.y')).toStrictEqual(['Why', 'YYY'])
 })
 
+test('Ignore irrelevant trailing characters in property string', () => {
+  expect(extract(testObj1, 'ee[0].')).toBe(1)
+})
+
+test('Ignore irrelevant trailing characters in property string, array top-level', () => {
+  expect(extract(arrayObj, '[0].')).toBe(1)
+})
+
 // Empty property strings
 test('Empty property string', () => {
   expect(extract(testObj1, '')).toStrictEqual(testObj1)

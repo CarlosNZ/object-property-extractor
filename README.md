@@ -69,7 +69,7 @@ extract(data, "user.children[1]") // Boba
 
 ### Array handling
 
-In addition to accessing array by index (above), if an array consists of objects, then it's possible to exract a single property from *each* object in the returned array.
+In addition to accessing array by index (above), if an array consists of objects, then it's possible to extract a single property from *each* object in the returned array.
 
 For example:
 ```js
@@ -82,7 +82,7 @@ Note that this is essentially a shorthand for:
 
 ### Error handling
 
-If a requested property can't be accessed (e.g. incorrect path), the function will *throw* an error, unless a fallback is provided. So unless you are catching an handling these errors at a higher level, it is recommended to always provided a fallback (`null` is an acceptable fallback).
+If a requested property can't be accessed (e.g. incorrect path), the function will *throw* an error, unless a fallback is provided. So unless you are catching and handling these errors at a higher level, it is recommended to always provided a fallback (`null` is an acceptable fallback).
 
 ## Testing
 

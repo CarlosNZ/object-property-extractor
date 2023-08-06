@@ -1,9 +1,10 @@
 {
   "name": "object-property-extractor",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A lightweight (no dependencies) tool to extract deeply nested values from JS Objects (or Arrays), with optional Fallback.",
-  "main": "build/extract.js",
-  "types": "build/extract.d.js",
+  "main": "build/index.cjs.js",
+  "module": "build/index.esm.js",
+  "types": "build/index.d.js",
   "files": [
     "build/**/*"
   ],
@@ -14,16 +15,21 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node ./src/dev/dev.ts",
-    "build": "rimraf ./build && tsc",
+    "build": "rimraf ./build && rollup -c && rimraf ./build/dts",
     "prepublish": "yarn build"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.2",
     "@types/jest": "^29.4.0",
     "@types/node": "^18.13.0",
     "jest": "^29.4.3",
     "rimraf": "^4.1.2",
+    "rollup-plugin-dts": "^5.3.1",
+    "rollup-plugin-sizes": "^1.0.5",
+    "rollup-plugin-terser": "^7.0.2",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.8.0",
+    "tslib": "^2.6.1",
     "typescript": "^4.9.5"
   }
 }

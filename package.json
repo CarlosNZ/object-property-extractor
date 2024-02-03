@@ -16,6 +16,7 @@
     "test": "jest",
     "dev": "ts-node ./src/dev/dev.ts",
     "build": "rimraf ./build && rollup -c && rimraf ./build/dts",
+    "compile": "rimraf ./build && tsc",
     "prepublish": "yarn build"
   },
   "devDependencies": {

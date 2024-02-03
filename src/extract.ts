@@ -1,4 +1,4 @@
-import { BasicObject, InputObject } from './types'
+import { InputObject } from './types'
 
 // Returns a specific property or index (e.g. application.name) from a nested Object
 const extractProperty = (

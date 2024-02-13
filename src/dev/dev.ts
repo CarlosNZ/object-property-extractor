@@ -32,6 +32,24 @@ const arrayObj = [
   },
 ]
 
+const nestedArrays = {
+  myArray: [
+    'Just a string',
+    [{ one: 1, two: 2 }, 99, null],
+    ['A', 'B'],
+    ['C', 'D', null],
+    [999, 1000, 1001],
+  ],
+}
+
+const nestedArraysRoot = [
+  'Just a string',
+  [{ one: 1, two: 2 }, 99, null],
+  ['A', 'B'],
+  ['C', 'D', null],
+  [999, 1000, 1001, 0, 0, 0, 0, 0, 0, 0, 0, 666],
+]
+
 const data = {
   user: {
     name: { first: 'Jango', last: 'Fett' },
@@ -44,5 +62,5 @@ const data = {
 }
 
 // console.log(extract(data, 'user.children[0].'))
-console.log(extract(data, 'user.weapons.name'))
-console.log((extract(data, 'user.weapons') as any[]).map((weapon) => weapon.name))
+console.log(extract(testObj1, 'b.inner3.innerArray[1].nope'))
+// console.log((extract(data, 'user.weapons') as any[]).map((weapon) => weapon.name))

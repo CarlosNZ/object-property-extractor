@@ -10,9 +10,9 @@ const extractProperty = (
     ? properties
     : splitPropertyString(properties as string)
 
-  const currentProperty = propertyPathArray[0]
+  if (propertyPathArray.length === 0) return inputObj
 
-  if (currentProperty === '') return inputObj
+  const currentProperty = propertyPathArray[0]
 
   if (Array.isArray(inputObj) && typeof currentProperty !== 'number')
     return inputObj.map((item) => extractProperty(item, propertyPathArray, fallback))
@@ -33,10 +33,14 @@ const extractProperty = (
 // into array of strings/indexes
 // e.g. "data.organisations.nodes[0]" => ["data","organisations", "nodes", 0]
 const splitPropertyString = (propertyPath: string) => {
-  const arr = propertyPath.split('.').map((part) => {
-    const match = /(.*)\[(\d+)\]$/.exec(part)
-    return !match ? part : [match[1], Number(match[2])].filter((val) => val !== '')
-  })
+  const arr = propertyPath
+    .split(/(\.|\[\d+\])/)
+    .filter((part) => part !== '.' && part !== '')
+    .map((part) => {
+      const match = /\[(\d+)\]/.exec(part)
+      if (!match) return part
+      return Number(match[1])
+    })
   return arr.flat()
 }
 

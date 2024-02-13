@@ -11,7 +11,7 @@ const testObj1 = {
       innerBool: false,
       innerArray: [
         { one: 1, two: 'two', three: true, four: null, five: true },
-        { one: 'one', two: 2, three: 3, four: { one: 1 } },
+        { one: 'one', two: 2, three: 3, four: { one: 1 }, 45: 'Number' },
       ],
     },
   },
@@ -30,6 +30,24 @@ const arrayObj = [
       { x: 'XXX', y: 'YYY' },
     ],
   },
+]
+
+const nestedArrays = {
+  myArray: [
+    'Just a string',
+    [{ one: 1, two: 2 }, 99, null],
+    ['A', 'B'],
+    ['C', 'D', null],
+    [999, 1000, 1001],
+  ],
+}
+
+const nestedArraysRoot = [
+  'Just a string',
+  [{ one: 1, two: 2 }, 99, null],
+  ['A', 'B'],
+  ['C', 'D', null],
+  [999, 1000, 1001, 0, 0, 0, 0, 0, 0, 0, 0, 666],
 ]
 
 // Base level properties
@@ -80,12 +98,24 @@ test('Array at top level', () => {
 test('Array inner', () => {
   expect(extract(testObj1, 'b.inner3.innerArray')).toStrictEqual([
     { one: 1, two: 'two', three: true, four: null, five: true },
-    { one: 'one', two: 2, three: 3, four: { one: 1 } },
+    { one: 'one', two: 2, three: 3, four: { one: 1 }, 45: 'Number' },
   ])
 })
 
 test('Array with high index', () => {
   expect(extract(testObj1, 'ee[11]')).toStrictEqual(12)
+})
+
+test('Sequential array indexes', () => {
+  expect(extract(nestedArrays, 'myArray[1][0]')).toStrictEqual({ one: 1, two: 2 })
+})
+
+test('Sequential array indexes at root', () => {
+  expect(extract(nestedArraysRoot, '[4][11]')).toStrictEqual(666)
+})
+
+test('Numeric property, not array', () => {
+  expect(extract(testObj1, 'b.inner3.innerArray[1].45')).toStrictEqual('Number')
 })
 
 test('Pull properties from objects inside array', () => {
@@ -104,11 +134,11 @@ test('Access property inside object in indexed array', () => {
   expect(extract(testObj1, 'b.inner3.innerArray[1].four')).toStrictEqual({ one: 1 })
 })
 
-test('Array at top level (object is array)', () => {
+test('Array at root (object is array)', () => {
   expect(extract(arrayObj, '[0]')).toStrictEqual(1)
 })
 
-test('Array at top level (object is array), with nested elements', () => {
+test('Array at root (object is array), with nested elements', () => {
   expect(extract(arrayObj, '[2].one.y')).toStrictEqual(['Why', 'YYY'])
 })
 
@@ -116,7 +146,7 @@ test('Ignore irrelevant trailing characters in property string', () => {
   expect(extract(testObj1, 'ee[0].')).toBe(1)
 })
 
-test('Ignore irrelevant trailing characters in property string, array top-level', () => {
+test('Ignore irrelevant trailing characters in property string, array root', () => {
   expect(extract(arrayObj, '[0].')).toBe(1)
 })
 
@@ -158,7 +188,7 @@ test('Array index out of bounds', () => {
 
 test('Missing property - deep inside array', () => {
   expect(() => extract(testObj1, 'b.inner3.innerArray[1].nope')).toThrow(
-    /Unable to extract object property\nLooking for property: nope\nIn object: {"one":"one"+/gm
+    /Unable to extract object property\nLooking for property: nope\nIn object: {+/gm
   )
 })
 
@@ -179,7 +209,7 @@ test('Missing property - deep inside array, with fallback', () => {
 // Missing property in only one object in an array of objects
 test('Missing property on some objects in array', () => {
   expect(() => extract(testObj1, 'b.inner3.innerArray.five')).toThrow(
-    /Unable to extract object property\nLooking for property: five\nIn object: {"one"/
+    /Unable to extract object property\nLooking for property: five\nIn object: {/
   )
 })
 

@@ -17,7 +17,7 @@ const testObj1 = {
   },
   cee: null,
   dee: { 1: true, 2: 'two' },
-  ee: [1, 'two', { three: 4 }, false, undefined, null],
+  ee: [1, 'two', { three: 4 }, false, undefined, null, 7, 8, 9, 10, 11, 12],
   fun: (n: number) => n * 2,
 }
 
@@ -61,7 +61,20 @@ test('Get inner object, deeper', () => {
 
 // Get arrays, various depths
 test('Array at top level', () => {
-  expect(extract(testObj1, 'ee')).toStrictEqual([1, 'two', { three: 4 }, false, undefined, null])
+  expect(extract(testObj1, 'ee')).toStrictEqual([
+    1,
+    'two',
+    { three: 4 },
+    false,
+    undefined,
+    null,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+  ])
 })
 
 test('Array inner', () => {
@@ -69,6 +82,10 @@ test('Array inner', () => {
     { one: 1, two: 'two', three: true, four: null, five: true },
     { one: 'one', two: 2, three: 3, four: { one: 1 } },
   ])
+})
+
+test('Array with high index', () => {
+  expect(extract(testObj1, 'ee[11]')).toStrictEqual(12)
 })
 
 test('Pull properties from objects inside array', () => {
@@ -132,8 +149,8 @@ In object: null`)
 
 // Should probably have its own error
 test('Array index out of bounds', () => {
-  expect(() => extract(testObj1, 'ee[7]')).toThrow(
-    /Unable to extract object property\nLooking for property: 7\nIn object: \[+/gm
+  expect(() => extract(testObj1, 'ee[12]')).toThrow(
+    /Unable to extract object property\nLooking for property: 12\nIn object: \[+/gm
   )
 })
 
@@ -152,7 +169,7 @@ test('Missing property - top level, with fallback', () => {
 
 // Should probably have its own error
 test('Array index out of bounds, with fallback', () => {
-  expect(extract(testObj1, 'ee[9]', 666)).toBe(666)
+  expect(extract(testObj1, 'ee[19]', 666)).toBe(666)
 })
 
 test('Missing property - deep inside array, with fallback', () => {

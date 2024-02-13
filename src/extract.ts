@@ -34,7 +34,7 @@ const extractProperty = (
 // e.g. "data.organisations.nodes[0]" => ["data","organisations", "nodes", 0]
 const splitPropertyString = (propertyPath: string) => {
   const arr = propertyPath.split('.').map((part) => {
-    const match = /(.*)\[(\d)\]$/.exec(part)
+    const match = /(.*)\[(\d+)\]$/.exec(part)
     return !match ? part : [match[1], Number(match[2])].filter((val) => val !== '')
   })
   return arr.flat()

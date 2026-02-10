@@ -14,7 +14,10 @@ const extractProperty = (
 
   const currentProperty = propertyPathArray[0]
 
-  if (Array.isArray(inputObj) && typeof currentProperty !== 'number')
+  // For arrays, if not targeting a specific index, try and extract the property
+  // from *each* item in the array and return an array of results. If the array
+  // is empty, we can't extract anything so should return fallback or error.
+  if (Array.isArray(inputObj) && typeof currentProperty !== 'number' && inputObj.length > 0)
     return inputObj.map((item) => extractProperty(item, propertyPathArray, fallback))
 
   if (typeof inputObj !== 'object' || inputObj === null || !(currentProperty in inputObj))

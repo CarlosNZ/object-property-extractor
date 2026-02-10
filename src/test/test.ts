@@ -264,3 +264,13 @@ test('Non-integer array index', () => {
     /Unable to extract object property\nLooking for property: innerDeep2\[1\nIn object: {"innerDeep"/
   )
 })
+
+// Should error when accessing properties of empty array.
+test('Access property of empty array', () => {
+  expect(() => extract([], 'property')).toThrow(
+    /Unable to extract object property\nLooking for property: property\nIn object: \[\]/
+  )
+  expect(() => extract({ one: [] }, 'one.inside')).toThrow(
+    /Unable to extract object property\nLooking for property: inside\nIn object: \[\]/
+  )
+})
